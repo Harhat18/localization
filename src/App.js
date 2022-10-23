@@ -1,20 +1,26 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IntlProvider, FormattedMessage, FormattedNumber } from "react-intl";
 const messages = {
   "tr-TR": {
     title: "Merhaba Dünya",
-    description: "3 yeni mesajınız var",
+    description: "{count} yeni mesajınız var",
   },
+
   "en-US": {
     title: "Hello World",
-    description: "you have 3 new messages",
+    description: "you have {count} new messages",
   },
 };
 
 function App() {
-  const defaultLocale = navigator.language;
+  const isLocale = localStorage.getItem("locale");
+  const defaultLocale = isLocale ? isLocale : navigator.language;
   const [locale, setLocale] = useState(defaultLocale);
+
+  useEffect(() => {
+    localStorage.setItem("locale", locale);
+  }, [locale]);
 
   return (
     <div className="App">
@@ -22,7 +28,7 @@ function App() {
         <FormattedMessage id="title" />
         <br />
         <div>
-          <FormattedMessage id="description" />
+          <FormattedMessage id="description" values={{ count: 3 }} />
         </div>
         <br />
         <button onClick={() => setLocale("tr-TR")}>TR</button>
