@@ -18,8 +18,11 @@ function App() {
     <div className="App">
       <IntlProvider messages={messages[lang]}>
         <FormattedMessage id="title" />
-        <br></br>
-        <br></br>
+        <br />
+        <div>
+          <FormattedMessage id="description" />
+        </div>
+        <br />
         <button onClick={() => setLang("tr-TR")}>TR</button>
         <button onClick={() => setLang("en-US")}>EN</button>
       </IntlProvider>
