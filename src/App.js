@@ -13,18 +13,20 @@ const messages = {
 };
 
 function App() {
-  const [lang, setLang] = useState("tr-TR");
+  const defaultLocale = navigator.language;
+  const [locale, setLocale] = useState(defaultLocale);
+
   return (
     <div className="App">
-      <IntlProvider messages={messages[lang]}>
+      <IntlProvider locale={locale} messages={messages[locale]}>
         <FormattedMessage id="title" />
         <br />
         <div>
           <FormattedMessage id="description" />
         </div>
         <br />
-        <button onClick={() => setLang("tr-TR")}>TR</button>
-        <button onClick={() => setLang("en-US")}>EN</button>
+        <button onClick={() => setLocale("tr-TR")}>TR</button>
+        <button onClick={() => setLocale("en-US")}>EN</button>
       </IntlProvider>
     </div>
   );
